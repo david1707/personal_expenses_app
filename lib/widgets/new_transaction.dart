@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:personal_expenses_app/widgets/adaptive_flatbutton.dart';
+
+import '../widgets/adaptive_flatbutton.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -52,7 +58,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-          child: Card(
+      child: Card(
         elevation: 5,
         child: Container(
           padding: EdgeInsets.only(
@@ -64,6 +70,9 @@ class _NewTransactionState extends State<NewTransaction> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
+              CupertinoTextField(
+                placeholder: 'Title',
+              ),
               TextField(
                 decoration: InputDecoration(labelText: 'Title'),
                 controller: _titleController,
@@ -85,14 +94,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           : 'Picked data: ' +
                               DateFormat.yMd().format(_selectedDate)),
                     ),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: _presentDatePicker,
-                    )
+                    AdaptiveFlatButton('Choose Date', _presentDatePicker)
                   ],
                 ),
               ),
